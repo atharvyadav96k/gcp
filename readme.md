@@ -1,7 +1,7 @@
 # GCP Library
 
 ## Overview
-The Spotnearr Shared Library is a Go-based library designed to simplify the integration of Google Cloud Platform (GCP) services such as Firestore, Pub/Sub, and Secrets Management. This library provides a structured and reusable way to initialize and manage these services in your application.
+The GCP Library is a Go-based library designed to simplify the integration of Google Cloud Platform (GCP) services such as Firestore, Pub/Sub, and Secrets Management. This library provides a structured and reusable way to initialize and manage these services in your application.
 
 ## Features
 - **Firestore Integration**: Easily initialize and manage Firestore clients.
@@ -43,10 +43,6 @@ Clone the repository:
 git clone https://github.com/atharvyadav96k/gcp.git
 ```
 
-Navigate to the project directory:
-```bash
-cd spotnearr-shared
-```
 
 ### Importing the Library
 To use this library in your Go project, import it as follows:
