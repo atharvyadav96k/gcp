@@ -1,5 +1,5 @@
 package secrets
 
-func (e *Env) GetProjectId() string {
-	return e.GCP_PROJECT_ID
+func (e *Env) GetSecret(key string) string {
+	return e.secrets[key]
 }

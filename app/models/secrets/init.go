@@ -1,13 +1,20 @@
 package secrets
 
-import "os"
+import (
+	"sync"
+)
 
-func NewSecrets() Env {
-	env := Env{}
-	env.LoadSecrets()
-	return env
-}
+var (
+	instance *Env
+	once     sync.Once
+)
 
-func (e *Env) LoadSecrets() {
-	e.GCP_PROJECT_ID = os.Getenv("GCP_PROJECT_ID")
+func NewSecrets() *Env {
+	once.Do(func() {
+		instance = &Env{
+			secrets: make(map[string]string),
+		}
+		instance.LoadSecrets()
+	})
+	return instance
 }

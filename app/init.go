@@ -9,7 +9,7 @@ import (
 )
 
 func (a *App) InitEnvironmentVariables() {
-	a.Env = secrets.NewSecrets()
+	a.Env = *secrets.NewSecrets()
 }
 
 func (a *App) Init() *App {
@@ -19,10 +19,10 @@ func (a *App) Init() *App {
 	}
 }
 
-func (a *App) InitFirestore() error {
+func (a *App) InitFirestore(projectId string) error {
 	var err error
 	a.FireStore.Once.Do(func() {
-		client, initErr := firestore.InitFirestore(a.Env.GCP_PROJECT_ID)
+		client, initErr := firestore.InitFirestore(projectId)
 		if initErr != nil {
 			err = initErr
 			return
