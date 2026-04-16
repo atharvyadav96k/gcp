@@ -110,6 +110,20 @@ func (p *Password) HashPassword() error {
 	return nil
 }
 
+func (p Password) ComparePassword(plainPassword string) error {
+	if p == "" {
+		return errors.New("hashed password is empty")
+	}
+	err := bcrypt.CompareHashAndPassword([]byte(p), []byte(plainPassword))
+	if err != nil {
+		if errors.Is(err, bcrypt.ErrMismatchedHashAndPassword) {
+			return errors.New("invalid password")
+		}
+		return err
+	}
+	return nil
+}
+
 func (pn *PhoneNumber) String() string {
 	return pn.CountryCode + pn.Number
 }
