@@ -2,7 +2,6 @@ package entity
 
 import (
 	"errors"
-	"fmt"
 	"net/mail"
 	"reflect"
 	"strings"
@@ -24,12 +23,11 @@ func ValidateStruct(s interface{}) []error {
 
 	for i := 0; i < v.NumField(); i++ {
 		field := v.Field(i)
-		fieldName := v.Type().Field(i).Name
 		errList := []error{}
 		if validator, ok := field.Addr().Interface().(Validator); ok {
 			if err := validator.Validate(); err != nil {
 				errList = append(errList, err)
-				return []error{fmt.Errorf("validation failed for field: %s", fieldName)}
+				return errList
 			}
 		}
 	}
