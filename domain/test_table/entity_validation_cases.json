@@ -1,0 +1,203 @@
+{
+  "entity_validation_cases": [
+    {
+      "name": "valid_email_standard",
+      "entity_type": "email",
+      "input": "user@example.com",
+      "expected_valid": true
+    },
+    {
+      "name": "valid_email_subdomain",
+      "entity_type": "email",
+      "input": "user@mail.example.com",
+      "expected_valid": true
+    },
+    {
+      "name": "valid_email_with_numbers",
+      "entity_type": "email",
+      "input": "user123@example.com",
+      "expected_valid": true
+    },
+    {
+      "name": "valid_email_with_special_char",
+      "entity_type": "email",
+      "input": "user+tag@example.com",
+      "expected_valid": true
+    },
+    {
+      "name": "invalid_email_empty",
+      "entity_type": "email",
+      "input": "",
+      "expected_valid": false,
+      "error_message": "email address cannot be empty"
+    },
+    {
+      "name": "invalid_email_no_at",
+      "entity_type": "email",
+      "input": "userexample.com",
+      "expected_valid": false,
+      "error_message": "invalid email format"
+    },
+    {
+      "name": "invalid_email_no_domain",
+      "entity_type": "email",
+      "input": "user@",
+      "expected_valid": false,
+      "error_message": "email domain is invalid"
+    },
+    {
+      "name": "invalid_email_no_tld",
+      "entity_type": "email",
+      "input": "user@example",
+      "expected_valid": false,
+      "error_message": "email domain is invalid"
+    },
+    {
+      "name": "valid_password_standard",
+      "entity_type": "password",
+      "input": "ValidPass123",
+      "expected_valid": true
+    },
+    {
+      "name": "valid_password_with_special",
+      "entity_type": "password",
+      "input": "ValidPass123!@#",
+      "expected_valid": true
+    },
+    {
+      "name": "valid_password_long",
+      "entity_type": "password",
+      "input": "MySecurePassword123WithManyCharacters",
+      "expected_valid": true
+    },
+    {
+      "name": "invalid_password_too_short",
+      "entity_type": "password",
+      "input": "Pass123",
+      "expected_valid": false,
+      "error_message": "password must be at least 8 characters long"
+    },
+    {
+      "name": "invalid_password_no_uppercase",
+      "entity_type": "password",
+      "input": "validpass123",
+      "expected_valid": false,
+      "error_message": "password must contain at least one uppercase letter, one lowercase letter, and one number"
+    },
+    {
+      "name": "invalid_password_no_lowercase",
+      "entity_type": "password",
+      "input": "VALIDPASS123",
+      "expected_valid": false,
+      "error_message": "password must contain at least one uppercase letter, one lowercase letter, and one number"
+    },
+    {
+      "name": "invalid_password_no_number",
+      "entity_type": "password",
+      "input": "ValidPassword",
+      "expected_valid": false,
+      "error_message": "password must contain at least one uppercase letter, one lowercase letter, and one number"
+    },
+    {
+      "name": "valid_phone_number_us",
+      "entity_type": "phone_number",
+      "country_code": "+1",
+      "number": "2025551234",
+      "expected_valid": true
+    },
+    {
+      "name": "valid_phone_number_india",
+      "entity_type": "phone_number",
+      "country_code": "+91",
+      "number": "9876543210",
+      "expected_valid": true
+    },
+    {
+      "name": "valid_phone_number_with_formatting",
+      "entity_type": "phone_number",
+      "country_code": "+1",
+      "number": "(202) 555-1234",
+      "expected_valid": true
+    },
+    {
+      "name": "valid_phone_number_min_length",
+      "entity_type": "phone_number",
+      "country_code": "+44",
+      "number": "123456",
+      "expected_valid": true
+    },
+    {
+      "name": "invalid_phone_no_plus",
+      "entity_type": "phone_number",
+      "country_code": "1",
+      "number": "2025551234",
+      "expected_valid": false,
+      "error_message": "invalid country code (must start with +)"
+    },
+    {
+      "name": "invalid_phone_empty_country_code",
+      "entity_type": "phone_number",
+      "country_code": "",
+      "number": "2025551234",
+      "expected_valid": false,
+      "error_message": "invalid country code (must start with +)"
+    },
+    {
+      "name": "invalid_phone_number_too_short",
+      "entity_type": "phone_number",
+      "country_code": "+1",
+      "number": "12345",
+      "expected_valid": false,
+      "error_message": "phone number is too short"
+    },
+    {
+      "name": "invalid_phone_number_too_long",
+      "entity_type": "phone_number",
+      "country_code": "+1",
+      "number": "1234567890123456",
+      "expected_valid": false,
+      "error_message": "phone number is too long"
+    },
+    {
+      "name": "valid_new_email",
+      "entity_type": "new_email",
+      "input": "test@example.com",
+      "expected_valid": true
+    },
+    {
+      "name": "invalid_new_email_empty",
+      "entity_type": "new_email",
+      "input": "",
+      "expected_valid": false,
+      "error_message": "email cannot be empty"
+    },
+    {
+      "name": "valid_new_password",
+      "entity_type": "new_password",
+      "input": "ValidPass123",
+      "expected_valid": true
+    },
+    {
+      "name": "invalid_new_password_empty",
+      "entity_type": "new_password",
+      "input": "",
+      "expected_valid": false,
+      "error_message": "password cannot be empty"
+    },
+    {
+      "name": "valid_new_phone_number",
+      "entity_type": "new_phone_number",
+      "country_code": "+1",
+      "number": "2025551234",
+      "expected_valid": true
+    },
+    {
+      "name": "invalid_new_phone_empty_code",
+      "entity_type": "new_phone_number",
+      "country_code": "",
+      "number": "2025551234",
+      "expected_valid": false,
+      "error_message": "country code cannot be empty"
+    }
+  ]
+}
