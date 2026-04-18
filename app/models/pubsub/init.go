@@ -6,14 +6,19 @@ import (
 	"cloud.google.com/go/pubsub"
 )
 
-func InitPubSub(projectId string) (*pubsub.Client, error) {
-	var err error
-	ctx := context.Background()
-	Instance.Once.Do(func() {
-		Instance.Client, err = pubsub.NewClient(ctx, projectId)
-	})
-	if err != nil {
-		return nil, err
-	}
-	return Instance.Client, nil
+// InitPubSub initializes and returns a new Pub/Sub client.
+//
+// Parameters:
+//   - ctx: context for cancellation and timeout
+//   - projectId: Google Cloud project ID
+//
+// Returns:
+//   - *pubsub.Client
+//   - error if initialization fails
+//
+// NOTE:
+// This function does not manage singleton state.
+// Caller is responsible for reuse and closing the client.
+func InitPubSub(ctx context.Context, projectId string) (*pubsub.Client, error) {
+	return pubsub.NewClient(ctx, projectId)
 }

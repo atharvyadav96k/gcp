@@ -6,15 +6,29 @@ import (
 	"github.com/atharvyadav96k/gcp/common"
 )
 
-func Send(w http.ResponseWriter, status int, message string, data interface{}) {
+// Send writes a JSON response to the client.
+//
+// Parameters:
+//   - w: http response writer
+//   - status: HTTP status code
+//   - message: optional message
+//   - data: response payload
+//   - errs: optional error messages
+func Send(w http.ResponseWriter, status int, message string, data interface{}, errs []string) {
 	response := Response{
 		Status:  status,
 		Message: message,
 		Data:    data,
+		Errors:  errs,
 	}
-	// Convert response to JSON and send it back to the client
-	json, _ := common.ToJSON(response)
+
+	jsonData, err := common.ToJSON(response)
+	if err != nil {
+		http.Error(w, "failed to encode response", http.StatusInternalServerError)
+		return
+	}
+
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	w.Write(json)
+	w.WriteHeader(status) // ✅ FIXED
+	w.Write(jsonData)
 }

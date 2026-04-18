@@ -6,8 +6,23 @@ import (
 	"github.com/atharvyadav96k/gcp/app/models/secrets"
 )
 
+// App is the central container for all application-level dependencies.
+// It holds initialized clients for external services like Firestore,
+// Pub/Sub, and environment configuration.
+//
+// This struct should be created once (singleton-style) and reused
+// across the application to avoid re-initializing clients.
 type App struct {
-	Env       secrets.Env
-	FireStore *firestore.Firestore
-	PubSub    *pubsub.PubSub
+
+	// Env contains environment variables and secrets required
+	// for configuring external services (e.g., project IDs, keys).
+	Env secrets.Env
+
+	// FireStore provides access to the Firestore database client.
+	// It manages initialization and lifecycle of the Firestore connection.
+	FireStore *firestore.Service
+
+	// PubSub provides access to Google Cloud Pub/Sub client.
+	// It is used for publishing and subscribing to messages.
+	PubSub *pubsub.Service
 }

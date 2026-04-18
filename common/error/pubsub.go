@@ -4,4 +4,5 @@ import "errors"
 
 var (
 	ErrPubSubClientNotInitialized = errors.New("pubsub client not initialized")
+	ErrInvalidTopic               = errors.New("Invalid pubsub topic")
 )
